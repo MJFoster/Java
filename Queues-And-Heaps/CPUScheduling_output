@@ -1,0 +1,19 @@
+second 0 :  JOB ID 0 arrives, timeRequired 6, priority 2  
+second 1 :  JOB ID 1 arrives, timeRequired 5, priority 3  
+second 2 :  
+second 3 :  
+second 4 :  JOB ID 4 arrives, timeRequired 3, priority 4  
+second 5 :  JOB ID 5 arrives, timeRequired 1, priority 3  
+second 6 :  (JOB ID 5 finish)
+second 7 :  JOB ID 7 arrives, timeRequired 5, priority 4  
+second 8 :  JOB ID 8 arrives, timeRequired 5, priority 1  
+second 9 :  
+second 10 :  JOB ID 10 arrives, timeRequired 4, priority 2  
+second 11 :  JOB ID 11 arrives, timeRequired 1, priority 1  
+second 12 :  (JOB ID 11 finish)
+second 13 :  JOB ID 13 arrives, timeRequired 1, priority 2  
+second 14 :  JOB ID 14 arrives, timeRequired 5, priority 5  (JOB ID 13 finish)
+--- Simulation completed ---
+Simulation time: 15 unit time.
+Number of processes: 3
+Average Turn around time for a process: 2.0

@@ -1,0 +1,74 @@
+****************
+* Project p3/HashTest
+* CS 221-01
+* October 27, 2016
+* MaryJo Foster
+**************** 
+  
+
+INCLUDED FILES:
+  * HashTest.java - Main driver to test the HashTable & HashObject classes.
+  * HashTable.java - HashTable class.
+  * HashObject.java - HashObject class.
+  * PrimeNotFoundException.javac - Exception class used when determining valid prime numbers in range.
+  * README - this file
+
+
+COMPILING AND TESTING:
+
+  All project files should reside in the same directory.
+
+  From the directory containing the .java source code files,
+  compile the source code with the following command:
+    $ javac *.java
+
+  Run the compiled class file with the command and command line arguments where
+  you must specify one of the arguments in each [], and filename is the data filename:
+    $ java HashTest <[1|2|3]> <[load value]> [debug level [0|1|2]]
+
+  Console output will give the results of the tests.
+
+TEST RESULTS:
+
+Input Source 1:  random number    
+    
+Actual Results    
+alpha linear  double
+0.50  1.49    1.38
+0.60  1.75    1.54
+0.70  2.17    1.71
+0.80  3.05    2.01
+0.90  5.41    2.57
+0.95  10.38   3.13
+0.98  24.28   4.03
+0.99  37.19   4.65
+
+
+Input Source 2:  current time   
+    
+Actual Results    
+alpha linear  double
+0.50  1.00    1.00
+0.60  1.00    1.00
+0.70  1.00    1.00
+0.80  1.00    1.00
+0.90  1.00    1.00
+0.95  1.00    1.00
+0.98  1.00    1.00
+0.99  1.00    1.00
+
+
+Input Source 3:  word-list    
+    
+Actual Results    
+alpha linear  double
+0.50  1.59    1.40
+0.60  2.08    1.54
+0.70  3.76    1.72
+0.80  7.43    2.02
+0.90  22.37   2.57
+0.95  155.21  3.15
+0.98  375.59  3.96
+0.99  524.39  4.61
+
+

@@ -1,0 +1,148 @@
+****************
+* BTree
+* CS 321
+* 12/4/2016
+* Ryleigh Moore, MaryJo Foster, Joe Bell
+****************
+
+OVERVIEW:
+ This program provides an implementation for creating and searching
+ a BTree with the motivation of DNA sequencing of human genome
+ (.gbk) files. The data being handled is large, therefore, the BTree
+ structure is located in a binary RandomAccess file.
+
+ The biological motivation behind is to study the frequency of different length subsequences
+ to see if they are random or that some sequences are more likely to be found in the DNA.
+
+
+INCLUDED FILES:
+
+ # Driver Classes
+    GeneBankCreateBTree.java
+    GeneBankSearch.java
+ # Structure classes and helper classes
+    BTree.java
+        BTreeNode - internal class
+    TreeObject.java
+    SequenceReader.java
+    SubStringConverter.java
+    Interface DiskSize.java
+ # Exceptions
+    InvalidSequenceException.java
+    InvalidSubSequenceLengthException.java
+ # Other
+    README - this file
+
+
+BUILDING AND RUNNING:
+The project contains 2 driver classes:
+
+ # GeneBankCreateBTree
+    From the directory containing all source files, compile the test
+        class (and all dependent classes) with the command:
+         $ javac *.java
+
+        Run the compiled SetTester class with the command:
+         $ java GeneBankSearch <0/1(no/with Cache)> <degree> <gbk file> <sequence length> [<cache size>] [<debug level>]
+                0- Select no cache or cache use to store node objects of the tree.
+                1- The degree of the tree - If the user specifies 0, then the optimum degree based on a disk block size
+                                            of 4096 bytes and the size of the BTree node on disk is used.
+                2- The input file with the DNA sequences
+                3- The sequence length is an integer that must be between 1 and 31 (inclusive).
+                4- Optional: Cache size if cache use selected.
+                5- Optional: Debug Level with default value of 0.
+                       0 Any diagnostic messages, help and status messages must be be printed on standard
+                         error stream.
+                       1 The program writes a text file named dump, that has the following line format:
+                         <frequency> <DNA string>. The dump file contains frequency and DNA string
+                         (corresponding to the key stored) in an inorder traversal.
+
+# GeneBankSearch
+    From the directory containing all source files, compile the test
+    class (and all dependent classes) with the command:
+     $ javac *.java
+
+    Run the compiled SetTester class with the command:
+     $ java GeneBankSearch <0/1(no/with Cache)> <btree file> <query file> [<cache size>] [<debug level>]
+            0- Select no cache or cache use to store node objects of the tree.
+            1- The BTree file xyz.gbk.btree.data.k.t
+            2- The query file contains all the DNA strings of a specific sequence length that we want to
+               search for in the specified btree file. The strings are one per line and they all must
+               have the same length as the DNA sequences in the btree file. The DNA strings use a, c, t, and g
+               (either lower or upper case).
+            3- Optional: Cache size if cache use selected.
+            4- Optional: Debug Level with default value of 0.
+                   0 The output of the queries should be printed on the standard output stream. Any
+                   diagnostic messages, help and status messages must be be printed on standard
+                   error stream.
+
+PROGRAM DESIGN:
+
+    DATA:
+         The program starts by reading in the GeneBank files. These files
+         have a bunch of annotations followed by the keyword ORIGIN. The DNA
+         sequences start from the next line. Each line has 60 characters (one of A, T, C, G, could
+         be lower/upper case) until the end of sequence, which is denoted by // on a line by itself.
+         Sometimes you will see the character N, which denotes that the sequence is not known at
+         that character. You would skip these characters. One GeneBank file may have several DNA
+         sequences in it, each marked by ORIGIN and // tags.
+         When we reach a character N, we assume that the subsequence has ended. Similarly, when
+         we reach //, we also assume that the subsequence has ended. So at those points, we reset
+         the subsequence that we were building and start over when we find the next ORIGIN or the
+         next valid character after seeing a N.
+
+         Since we only have four possible bases (A, C, G and T), we optimize
+         on space by converting our DNA strings to base 4 numbers. Then we can represent each
+         base by a 2-bit binary number, as shown below:
+         A 00
+         T 11
+         C 01
+         G 10
+         The binary compact representation of the subsequences will result
+         in a unique 64-bit value. Hence we can directly use that as our key value.
+
+    TARGET:
+        For a given GeneBank file, we want to convert it into a BTree with each object being a
+        DNA sequence of specified length k (where 1 ≤ k ≤ 31). We will take the DNA sequence
+        from the GeneBank file and break it into sequences of length k each. We are interested in
+        all subsequences with length k. For example, in the sequence AATTCG, the subsequences
+        of length three are: AAT, ATT, TTC and TCG. Once we have a BTree for a length k, we
+        want to be able to search for query sequences of length k. The search returns the frequency
+        of occurrence of the query string (which can be zero if it is not found).
+
+    DETAILS:
+        The program always keeps the root node in memory. Along with the root, only three other nodes
+        are stored in memory - LeftChildNode, RightChildNode, and a temporary ChildNode. These nodes
+        are swapped with noeds in the file in order to create, search, and traverse the tree.
+
+    BTREE FILE LAYOUT:
+             Node     Data
+             0-3      tree degree t
+             4-7      sequence length k
+             8-11     node size
+             12-15    root offset
+             16-16+nodeSize  first node created
+             etc...
+
+         ToString example of a node accessed from the file:
+         BTreeNode [n:3, Idx=112, treeObjects=[5 6, 12 6, 19 6, 49 1, 53 3], childPtrs=[16, 880, 400, 304, 496, 592], parentPtr= 688, leaf=false thisNodeOffset= 112]
+
+
+    CACHE:
+
+     GeneBankCreateBTree  0 7 test3.gbk 7 0      :  94463 ms
+                          1 7 test3.gbk 7 100    :  68673 ms
+                          1 7 test3.gbk 7 500    :  32749 ms
+
+     GeneBankSearch       0 xyz.gbk.btree.data.7.7 query7       :  125849 ms
+                          1 xyz.gbk.btree.data.7.7 query7 100   :  120617 ms
+                          1 xyz.gbk.btree.data.7.7 query7 500   :  125691 ms
+
+     The GeneBankCreateBTree was greatly improved by the cache implementation. The run time was reduced by 27% on 100 cache size and 65% for a cache size of 500.
+     The search stayed about the same overall bur improved slightly in both cache size cases.
+
+
+
+DISCUSSION:
+
+

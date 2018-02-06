@@ -1,0 +1,48 @@
+First level cache with 5 entries has been created
+Second level cache with 10 entries has been created
+.
+Total number of references: 20
+Total number of cache hits: 1
+The global hit ratio                  : 0.05
+Number of 1st-level cache hits: 1
+1st-level cache hit ratio             : 0.05
+Number of 2st-level cache hits: 0
+2st-level cache hit ratio             : 0.0
+
+
+
+First level cache with 5 entries has been created
+Second level cache with 12 entries has been created
+.
+Total number of references: 20
+Total number of cache hits: 3
+The global hit ratio                  : 0.15
+Number of 1st-level cache hits: 1
+1st-level cache hit ratio             : 0.05
+Number of 2st-level cache hits: 2
+2st-level cache hit ratio             : 0.10526315789473684
+
+
+First level cache with 5 entries has been created
+Second level cache with 15 entries has been created
+.
+Total number of references: 20
+Total number of cache hits: 4
+The global hit ratio                  : 0.2
+Number of 1st-level cache hits: 1
+1st-level cache hit ratio             : 0.05
+Number of 2st-level cache hits: 3
+2st-level cache hit ratio             : 0.15789473684210525
+
+
+
+First level cache with 5 entries has been created
+Second level cache with 15 entries has been created
+.
+Total number of references: 20
+Total number of cache hits: 4
+The global hit ratio                  : 0.2
+Number of 1st-level cache hits: 1
+1st-level cache hit ratio             : 0.05
+Number of 2st-level cache hits: 3
+2st-level cache hit ratio             : 0.15789473684210525
