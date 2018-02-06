@@ -1,0 +1,134 @@
+**********************************
+* Project  p3 / Jukebox
+* CS 121 / Section 4
+* 03-09-16
+* MaryJo Foster
+**********************************
+
+OVERVIEW:
+
+ Class "Jukebox" provides all necessary instance variables and sub-classes to play and
+ report statistics to the screen on a list of songs.  Jukebox is the driver class
+ that will produce the expected output.  All files area listed below, including test 
+ classes.
+ 
+ 
+INCLUDED FILES:
+
+ README - this documentation file.
+ 
+ Driver and primary classes
+ 	* Jukebox.java - source file (Driver class, see description above).
+ 	* Song.java - source file (Constructs and returns a "Song" object and all methods to manage a Song).
+  	* PlayList.java - source file (Constructs and returns an ArrayList, "PlayList", to contain
+                      and manage "Song" objects in an ArrayList data structure.
+ 	* TimedAudioClip.java - source file (Plays an audio clip through to it's end w/o asynchronous issue).
+ 
+ Test classes
+ 	* SongTest.java - test file (Runs appropriate tests to validate the "Song" class).
+ 	* PlayListTest.java - test file (Runs appropriate tests to validate the "PlayList" class).
+
+ Data File 
+ 	* playlist.txt - test file
+ 
+ Test File
+ 	* autograde.sh - test file
+
+
+COMPILING AND RUNNING:
+ 	To compile the driver class and each source file described in this README, move
+ 	into the directory containing all the source files, and type the following command:
+ 		$ javac *.java
+              
+ 	To run, type the following command after compiling without errors.
+ 		$ java Jukebox
+
+ 	A output will be displayed on the screen after the program finishes.
+
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+ 	Class Jukebox will deliver all the functions of a real Jukebox in that it
+ 	allows the user to manage individual Songs as well as PlayLists of Songs.
+ 	In addition, the Jukebox class comes with an easy to use menu that the user can 
+ 	access when making PlayList or Song choices.
+  
+Important Concepts:
+     - "Test 1st" coding practices were implemented in this project which
+       led to cleaner, faster, and more efficient coding practice.
+     - An ArrayList was utilized as the data structure for a PlayList.  It served
+       as a good structure to manage changes in Songs to the PlayList.  Adding
+       and removing Songs from the PlayList were much easier to do since the
+       ArrayList data type has a better way of handling lists since they can
+       grow dynamically better than arrays can. 
+
+
+TESTING:
+ 	-Test files were provided by CS Instructors.
+    	- A few more tests were added in a 'main' method for the Song class to 
+    	  test the default constructor. All tests PASSED
+    		+ Test for the instantiation of a default Song constructor.
+        	+ Test the toString() method on a default Song.
+        	+ Test the getter and setter methods, getNumOfPlays() and setNumOfPlays(),
+          	  for the additional instance variable 'numOfPlays'.
+          
+ 	- All tests run comparing expected results to actual results, then
+ 	  report to screen either 'PASSED' or 'FAILED' with each method name.
+ 
+ 	- SongTest.java - Source file used to test the constructors and methods
+                      of the Song class.
+ 
+ 	- PlayListTest.java - Source file used to test all constructors and method of the
+                          PlayList class.  This test file was provided.
+ 
+REMAINING ISSUES:  None
+
+DISCUSSION:
+	This was a good project in demonstrating how to use an ArrayList as well
+	as how to develop and test your own class and all of it's methods.  This
+	project was a good implementation of how best, and why, private instance
+	variables are encapsulated.
+ 
+ 	This project also showed a great example of multiple constructors, getter
+ 	and setter methods, and the toString method.  It's now very clear why
+ 	we have those methods and how they are implemented.
+  
+	I discovered from this project the following concepts:
+    	We can have more than one 'main' method in the source code w/o
+    	effecting execution, who knew! It appears that the Java interpreter
+    	will recognize the command line argument source file's main() method 
+    	as the driver.  Apparently all other main() methods are ignored, so 
+    	this creates an easy to implement 'test' environment of encapsulated methods
+    	that you may not necessarily be tested by your test classes.
+ 
+		What seemed obvious, was to use the Scanner's nextInt() method to read in
+		the necessary "int" data types in this project.  I discovered that 
+		was not possible since nextInt() does not position the Scanner past the 
+		'\n' character when scanning numbers.  It stops scanning as soon as it hits
+		any whitespace, including '\n' characters.  It became clear that I needed
+		to still use the Scanner's nextLine() method in order to position the Scanner
+		past the '\n'.  This meant that I needed the String method's trim() method,
+		along with a method to convert a String into an (int) since I can't cast
+		an (int) onto a String.  The solution was to use the Integer wrapper class 
+		so that I could then take advantage of the Integer classes parseInt() method
+		that converts a String to an int!
+		     
+	If I were to refactor this code, I would start with the following:
+    	This may have been placed in the project for the purpose of learning, but if
+    	not ... I would refactor the PlayListTest class to be less repetitive in the
+    	toString() tests.  When testing the ArrayList, the list name was not accurate
+    	and could have been testing the PlayList's name field.  Also, the expected 
+    	toString() output of a defined PlayList vs. an empty PlayList were different, 
+    	requiring 2 different tests.
+    
+		Add exceptions to the code for null menu choice.  When the user does not make
+		a menu choice at all, but just hits the enter key by itself, you get a stack
+		trace where an Excetion could be used here.  Currently this throws the
+		StringIndexOutOfBoundsException Exception along with a stack trace.
+	
+		Add more instance variables to my Song class to further categorize each Song.
+	  		- Boolean favorite
+	  		- String genre
+	
+		Add the capability of creating a playList based on either a particular
+		'artist', the instance variable 'numOfPlays', and possibly a few new
+		instance variables like 'favorite' and/or 'genre'.  

@@ -1,0 +1,137 @@
+****************
+* Project p3/DoubleLinkedList
+* CS 221-01
+* June 17, 2016
+* MaryJo Foster
+**************** 
+
+
+OVERVIEW:
+  This project consists of a library of files that implement a Double Linked List class.
+  To use the IUDoubleLinkedList class, simply import all the files labeled "source file"
+  below into your project folder, and instantiate a Double Linked List in your code.
+  
+  Once a Double Linked List is instantiated, it can grow and shrink dynamically through 
+  calls to it's methods that have been defined in this IUDoubleLinkedList class.
+
+
+INCLUDED FILES:
+  * IndexedUnorderedList.java - Source File: Interface implemented by IUDoubleLinkedList class.
+  * IUDoubleLinkedList.java - Source Fie: Class that implements the IndexedUnorderedList Interface
+                              and defines the IUDoubleLinkedList.  Contains private
+                              inner class IUDLLIterator that iplements the Java ListIterator.
+  * DLLNode.java - Source file: Class defining an individual node to contain data and be linked 
+                                into the IUDoubleLinkedList.
+  * Test_ChangeScenario_X : Unit tests for IUDoubleLinkedList class (see Testing below)
+  * ItrTest_ChangeScenario_X : Unit tests for DLLIterator class (see Testing below)
+  * ListIteratorTest_ChangeScenario_X : Test Class Files (see Testing below)
+  * iudoublelinkedlist.xml : Test driver for TestNG suite.
+  * EmptyCollectionException - Source File: (Exception class thrown when collection in empty)
+  * ElementNotFoundException - Source File: (Exception class thrown when elements are missing)
+  * README - this file
+
+  
+COMPILING AND TESTING:
+
+  All project files should reside in the same directory.
+
+  From the directory containing the .java source code files,
+  compile the source code with the following command:
+    $ javac *.java
+
+  Since this project doesn't have any code to execute, below is the
+  command to issue at the command prompt to test it.  Type the following
+  from the directory containing all of your source code:
+    $ java org.testng.TestNG iudoublelinkedlist.xml
+
+  Console output will give the results of the tests.
+
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+  
+  This project demonstrates how to implement a Double Linked List, how to test
+  the implemenation using a Unit Testing Suite "TestNG", and how to use an 
+  inner class for an Iterator and ListIterator.
+  
+  DESIGN: 
+  	The design of this project was based on an IndexedUnorderedList interface
+    along with a test suite that allowed for the implementation of different
+    types of underlying lists to use the same test suite.  A very similar test
+    suite and interface was used for a multiple types of underlying lists.
+    Since this double linked list was designed with an interface that was also
+    implemented by an array based list as well as a single linked list, I was
+    able to use the existing tests for all.
+    
+    This double linked list was also desgined to hold a generic due to
+    the fact that Java allows for polyporphism in it's classes.  This follows
+    the consistent theme of writing reusable code whenever possible.  
+  	
+  	This list includes an inner class DLLIterator that implements Java's ListIterator
+    class and functions on double linked lists with both forward and backward movements.
+    The ListIterator can move through the list in both directions, and continues as 
+    long as the operator does not attempt to iterate past either end of the list.  The
+    list safeguards this by throwing exceptions whenever it's ListIterator falls off
+    either the front or the back.  This allows the user of this list to plan for 
+    unsafe iteration by keeping the ListIterator on the list.
+    
+     
+  IMPORTANT CONCEPTS:
+ 	
+ 	A ListIterator is an object that traverses both directions through a Double Linked List.
+  Consequently, you can position the ListIterator easily in both directions as you traverse
+  the list.
+  
+  A double linked list with a ListIterator gives the user the best of both worlds between 
+  an indexed vs. a linked list data structure.
+  
+  The overall algorithm is as follows:
+  1. Instantiate an IUDoubleLinkedList object that implements the IUDoubleLinkedList interface,
+     and holds an manages the double linked list.
+  2. Run Unit Tests on a newly instantiated IUDoubleLinkedList by running through a suite of tests
+     that differ from one another by intializing the list at specific states.
+  3. The unit tests are written to test all of the methods found in the class IUDoubleLinkedList
+     and it's inner class IUDLLIterator that implements Java's ListIterator class.
+  
+     
+TESTING:  
+  
+  Testing was accomplished through a series of unit tests managed by
+  a testing suite, TestNG.  Each unit test class is a scenario that
+  begins in a specific initial state.  Once the IUDoubleLinkedList is
+  instantiated and it's initial state set, the test class runs through 
+  a series of boundary and equivalency tests on each of the
+  IUDoubleLinkedList methods, the Iterator methods, and the ListIterator methods.
+  
+  There were 3,994 test completed in total, 0 failures.  I believe this test is air tight and can
+  be used safely.
+  
+  The TestNg suite consists of the following files:
+  
+   * iudoublelinkedlist.xml : an XML file that uses HTML to define the execution
+                             order of a series of unit test classes.                          
+   * TestCase.java : TestCase class containing static methods to be called by the test
+                    classes found in the XML file.   
+   * Test_ChangeScenario_X.java : Unit tests, 'X' is a test number, for a specific list state. 
+   * ItrTest_ChangeScenario_X.java : Unit tests, 'X' is a test number, for a specific Iterator state.  
+   * ListItrTest_ChangeScenario_X.java : Unit tests, 'X' is a test number, for a specific ListIterator state.
+  
+  
+DISCUSSION:
+
+Characteristics I discovered while implementing this project.
+1.  The Single Linked List class is similar to the Double Linked List class, with the Double
+    Linked class have quite a bit more capability since it has 2 pointers as well as a ListIterator
+    that will iterate both directions and continue beyond just one pass through the list.
+2.  The Double Linked List only actually needs one current pointer while iterating since you have a
+    previous pointer that can access what's before it.
+3.  The IUDLLIterator class, that implements Java's ListIterator, was very difficult to debug and setup
+    since the placement of the iterator was difficult to understand from the documentation.  
+    Learning exactly where the iterator was at all times seemed unclear at first until I realized that the
+    best way to confirm location was to track the iterator itself instead of the current pointer. A lot
+    of time was spent trying to understand exactly what the true expectation was first.  Once that
+    became clear, implementing that accordingly and then testing it for accuracy was very time consuming.
+    In trying to understand the rules of iteration from the documentatin, I went in circles many many times.
+4.  In the end, nearly 4000 successful tests were completed and I feel good about this implementation.
+    
+ 
+ 

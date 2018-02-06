@@ -1,0 +1,106 @@
+****************
+* Project p1/Magic
+* Class 221-01
+* Date 05-20-16
+* MaryJo Foster
+**************** 
+
+OVERVIEW:
+
+ This program manages the operations of a "Magic Square".
+ In general, based on the command line arguments, it either
+ creates a Magic Square, or checks the validity of a given
+ Magic Square.
+
+
+INCLUDED FILES:
+
+ * MagicSquare.java - source file
+ * MagicSquareUtilities.java - source file
+ * README - this file
+
+
+COMPILING AND RUNNING:
+
+ All project files should reside in the same directory.
+
+ From the directory containing the .java source code files,
+ compile the source code with the following command:
+   $ javac *.java
+
+ Run the program from the directory containing the .class compiled files:
+   $ java MagicSquare [-check | -create] filename [size (only required if -create specified)]
+
+ Console output will give the results after the program finishes.
+
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+
+ This program demonstrates how command line arguments are processed,
+ how static methods can be used, how Java handles reading from and
+ writing to text files, and how utilizing utility classes can simplify
+ and make your code more readable.
+
+ The algorithm is as follows:
+ 	- There are 2 modes of operation based on command line arguments:  
+ 		* Check: Read in and validate a Magic Square.
+ 		* Create: Build and save to disk a Magic Square of given dimensions.
+ 	- MagicSquare : The driver class that handles all of the command line
+ 					argument processing and validation, then calls
+ 					the correct utility methods to deliver either a new
+ 					Magic Square or a validity check on an existing Magic Square.
+ 	- Validity checking of a Magic Square is done by testing each row, column,
+ 		and diagonal for the proper sum based on the Magic Square size.
+ 		In addition, the entire Magic Square had to be iterated through to
+ 		validate that every integer was present in the square and no duplicates
+ 		existed.  Each of these checks were completed in a separate method.
+ 	- Creating a magic square was done through an algorithm that iterates
+ 		through each number in the range of 1-n^2 inclusively, where n is the
+ 		square's dimension.  In each iteration, the placement of the next integer
+ 		was assigned to a specific grid location.  When all cells are assigned
+ 		an integer value, the Magic Square is then written to a file with it's
+ 		dimension being on the 1st line by itself.
+ 
+It was interesting working with static methods in an Object Oriented language,
+and I will be testing more with this to learn its limitations/benefits.
+The instructions for the project called for writing as many small methods as
+possible for good standards practice.
+
+In conclusion and for the suggestion of refactoring down the road, I may convert those 
+static class variables to parameters being passed in to methods instead.
+
+
+TESTING:
+
+Testing was done by modifying the driver to read multiple command line arguments when
+in "-check" mode.  This allowed me to test a large supply of valid/invalid text files,
+and confirm my internal error testing and exception handlers were working as needed.  To
+ensure all bases were covered with test suites, all validity checks for data file formats
+were handled as well as Magic Square validity tests on the square's contents.
+
+Testing in "-create" mode was done by testing execution on existing/non-existing filenames,
+accessible/non-accessible directories, and even/odd dimensions.  Since this program will
+create a Magic Square for odd dimensions only, proper error handling was needed and tested
+as working.
+
+
+DISCUSSION:
+ 
+So in the MagicSquareUtilities class I chose to have 2 static class variables
+(boolean isValid, int[][] magicSquare) available to the entire class to simplifying
+parameters.  I'm not yet sure if that's a good or bad idea, so given more time to test,
+I will be learning if I've exposed those variables too much in that decision.
+
+I seem to spend a lot of time laying out my "plan of attack" on projects, but for me it helps
+a lot to see the overall picture.  By the time I actually start coding, I'm very familiar
+with how I want to implement my plan and smaller decisions are faster then.
+ 
+If I had more time, I would like to implement a Magic Square for even dimensions.
+
+
+EXTRA CREDIT:
+
+I added some extra error handling into processing the data files and command
+line arguments.  Testing was done with additional data files to check for too many/few rows/columns,
+and some additional Exceptions.  I also discovered that the algorithm does not create a valid
+Magic Square if the size of 1 was given.  This was handled better also.

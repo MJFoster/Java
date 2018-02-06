@@ -1,0 +1,104 @@
+****************
+* Project p4/CircuitTracer
+* CS 221-01
+* June 24, 2016
+* MaryJo Foster
+**************** 
+
+
+OVERVIEW:
+  The CircuitTracer project applies a "Brute Force" algorithm to data found in a text file to 
+  search for the shortest path between points, while navigating around components on a circuit
+  board.
+
+  Original circuit board layout is read in from a plain text file containing character representations
+  for start, end, open, occupied, and traced positions on the circuit board.
+  
+  Starting from the layout in the input file, the CircuitTracer will systematically traverse
+  through the board to build a list of possible paths.  From this list of paths, the shortest
+  solutions will then be returned as good results.   
+
+  Exception handlers are in place to handle invalid data from the input file, as well as invalid
+  Trace attempts across components.
+  
+  
+INCLUDED FILES:
+  * CircuitTracer.java - Source File: Interface implemented by IUDoubleLinkedList class.
+  * CircuitBoard.java - Source Fie: Class that implements the IndexedUnorderedList Interface
+                              and defines the IUDoubleLinkedList.  Contains private
+                              inner class IUDLLIterator that iplements the Java ListIterator.
+  * TraceState.java - Source File: Class defining an individual TraceState (path) on CircuitBoard.
+  * Storage.java - Source File: Class that manages the underlying storage used for TraceState objects.
+                                Class offers both a Stack and a Queue storage, chosen by user.
+  * IQueue.java - Source File: Interface
+  * Queue.java - Source File: Completed class, implements IQueue.java
+  * SLLNode.java - Source file: Class defining an individual node used in Queue class.
+  * IStack.java - Source File: Interface
+  * Stack.java - Source File: Completed class, implements IStack.java
+  * EmptyQueueException - Source File: Exception thrown when Queue is empty.
+  * InvalidFileFormatException - Source File: Exception thrown when file formatted incorrectly.
+  * OccupiedPositionException - Source File: Exception thrown when Trace attempted over a
+                                component on the board.
+  * README - this file
+
+
+COMPILING AND TESTING:
+
+  All project files should reside in the same directory.
+
+  From the directory containing the .java source code files,
+  compile the source code with the following command:
+    $ javac *.java
+
+  Run the compiled class file with the command and command line arguments where
+  you must specify one of the arguments in each [], and filename is the data filename:
+    $ java [-s/-q] [-c/-g] filename
+
+  Console output will give the results of the tests.
+
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+  
+  This project demonstrates how to combine the data structures of a Stack and a Queue into
+  one program, and give the user control over which one to use.  It also demonstrates a 
+  Brute Force search algorithm for systematic searching through a maze with 4 possible directions
+  at every juncture.
+  
+  DESIGN: 
+  	The design of this project was based on the use of Queue and Stack data structures to manage
+    search solutions as progress was made while searching from starting point to ending point.  A linked list was also used to maintain the valid solutions, and later compare them to determine which ones were the top choices.
+     
+  IMPORTANT CONCEPTS:
+ 	
+ 	When determining whether to use a Stack or a Queue, one should consider the size of your data, as
+  well as the number of additions or removals needed to manage the collection.
+  
+     
+TESTING:  
+  
+  Testing was completed through many different data files, both valid and invalid content.
+  
+  
+DISCUSSION:
+
+In completing this project I concluded the following:
+
+  1. The Big 'O' to evaluate a TraceState would be the order to remove it from Storage, then
+     determine if it's adjacent to the endingPoint, and finally add it to the solutionsList
+     or discard it.  When using a Stack vs. a Queue, this order appears to be the same since
+     both a Stack and a Queue can retreive the next object in (O)1 operations.  The remaining
+     steps needed to evaluate a TraceState as a "solution" are the same for a Stack vs. a Queue.
+  2. The number of overall searches needed was calculated by checking the number of times
+     a new TraceState was looked at.  This number appears to be identical when comparing storage
+     data structres of a Stack vs. a Queue.
+  3. The maximum number of TraceStates, or depth of TraceStates, kept in storage at any time was
+     larger when using a Queue vs. a Stack.  This largely varying size of collection coupled with 
+     the fact that we need to do a lot of adding and removing of objects confirms that this data
+     structure needs to be an ArrayList as it's underlying data structure.
+  4. In attempting to predict the Big 'O' of searching for a solution between a Stack vs. a Queue,
+     I found this too difficult for my knowledge base and the time alloted to complete this project.
+     This is still unclear to me.
+  5. Whether or not a Queue or a Stack was used, there will never be a guarantee that the 1st
+     solution is ideal.  Determining this would be dependant upon the complexity of the CircuitBoard
+     as well as it's size.
+

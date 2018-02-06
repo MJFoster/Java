@@ -1,0 +1,88 @@
+**********************************
+* Project  p5 / MyTunes
+* CS 121 / Section 4
+* 04-27-16
+* MaryJo Foster
+**********************************
+
+OVERVIEW: 
+
+ This is a Graphical User Interface (GUI) that provides a song playlist to the user.
+ The initial play list model is read from a text file, and all song clip files are
+ stored in a subfolder "sounds".
+ 
+ The overview of it's functionality reads as follows.  The user is provided an easy to
+ use interface for playing, stopping play, selecting new songs, adding new songs, and 
+ deleting existing songs.  In addition the user can change positioning of any song in
+ the list, and see the frequency of plays on each song on a heat map graph of buttons.
+  
+ This program demonstrates many different components of a GUI, including JPanels, JLists,
+ JScrollPanes, the many different JOptionPanes or dialogue boxes, and JButtons.  Also
+ demostrated in this program is the uses of Listeners (Action and List), as well as Timers.  
+ 
+ 
+INCLUDED FILES:
+ MyTunesGUI.java - Source file (driver class)
+ MyTunesGUIPanel.java - Source file to manage all GUI layout and functionality.
+ PlayList.java - Source file, the Playlist class that implements the PlayListInterface.
+ MyTunesPlayList.java - Source file, extends PlayList class.
+ PlayableSong.java - Source file, parent class for playing and managing songs.
+ Song.java - Source file, extends PlayableSong class with more methods.
+ PlayListInterface.java - Source file, interface implemented by PlayList class. 
+ README - this documentation file.
+ 
+ 
+ Data Files
+ 	* sounds/playlist.txt
+ 	* wav files in the 'sounds' sub-folder.
+ 	* jpg files in the 'images' sub-folder. Used for icons.
+ 	
+
+COMPILING AND RUNNING:
+ 	To compile the driver class and each source file described in this README, move
+ 	into the directory containing all the source files, and type the following command:
+ 		$ javac *.java
+              
+ 	To run, type the following command after compiling without errors.
+ 		$ java MyTunesGUI.java
+
+ 	A GUI will be displayed on the screen upon start of the program.
+ 	Close dialogue box to close.
+
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+ 	- In following the MVC concept of a Model, View, and Control design, a GUI
+ 	  keeps all of the underlying functionality of the play list hidden behind the
+ 	  panels and buttons of the GUI. In this example we have the following descriptions
+ 	  of the MVC:
+ 	  	'M': The Model is reprsented by the data used for the play list.
+ 	  	'V': The View is the GUI panels, panes, and lists.
+ 	  	'C': The Control is the GUI provided listeners that are connected to
+ 	  	     specific components of the GUI.  When an event occurs, the control
+ 	  	     portions of the GUI take over.
+ 	  
+ 	  This allows the user to interact with the data in a safe and simple way.
+
+      
+DISCUSSION:
+	I discovered from this project the following concepts:
+		
+		1. GUI's take a lot more time to program than I expected, and learning
+			the many different nuances of each component can take a lot of practice.
+			It would have been nice to have had more time dedicated to this project
+			in the CS 121 course, I found it very interesting to study.
+						
+		2. It's typically better to have listeners for each moving part instead
+			of sharing them between components.  Sharing listeners for components
+			that are in the same panel and have similar functionality works fine.
+			
+		3. Asynchronous execution is possible with Java, but complicates the flow
+			of control quite a bit.  Something to watch out for.
+			
+		4. Encapsulation is really useful when you have so many different moving
+			parts of code.
+			
+		
+SOURCES USED:
+	JAVA 8 API, tutors & instructors from BSU
+	

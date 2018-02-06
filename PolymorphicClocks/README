@@ -1,0 +1,94 @@
+****************
+* Project p2/clocks
+* CS 221-01
+* May 24, 2016
+* MaryJo Foster
+**************** 
+
+
+OVERVIEW:
+  The clocks project demonstrates Polymorphism through an abstract class being extended
+  by multiple child classes that each fully implement all of the abstract class abstract
+  methods.  In this project, the display() method is unique to each child class and
+  therefore fully implemented in each child class in a slightly different manner.
+  
+  The driver of this project, ClockSimuation, utilizes a container class, Bag, to contain
+  and manage each unique Clock object.  Each unique Clock is constructed from a derived Clock
+  class that utilizes the Clock constructor in setting it's own unique qualities.
+
+
+INCLUDED FILES:
+  * TimePiece.java - source file (Interface with all promised methods for a general time piece)
+  * Clock.java - source file (Abstract class that implements TimePiece Interface)
+  * Bag.java - source file (A class utilizing an array implementation for a container of 
+  							generic objects.  We instantiate "Bag" objects to hold "Clock"
+  							objects for this project.)
+  * Time.java - source file (class defining Time objects that manage time.  All Clocks
+                            have an instance variable of type Time to keep track of their time.)
+  * ClockSimulation.java - source file (driver class that instantiates a "Bag" to hold "Clocks", then
+                           display each clock's time at specific intervals.)
+  * AtomicClock.java - source file (derived / child class of the Clock class, that constructs & manages Atomic clocks.
+  * CuckooClock.java - source file (derived / child class of the Clock class, that constructs & manages Cuckoo clocks.
+  * GrandfatherClock.java - source file (derived / child class of the Clock class, that constructs & manages Grandfather clocks.
+  * WristWatch.java - source file (derived / child class of the Clock class, that constructs & manages Wrist Watches.
+  * Sundial.java - source file (derived / child class of the Clock class, that constructs & manages Sun Dial clocks.
+  * EmptyCollectionException - source file (Exception class thrown when collection in empty)
+  * ElementNotFoundException - source file (Exception class thrown when elements are missing)
+  * README - this file
+
+  
+COMPILING AND RUNNING:
+
+  All project files should reside in the same directory.
+
+  From the directory containing the .java source code files,
+  compile the source code with the following command:
+    $ javac *.java
+
+  Run the program from the directory containing the .class compiled files:
+    $ java ClockSimulation
+
+  Console output will give the results after the program finishes.
+
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+  
+  The program is designed with an abstract class "Clock" that implements the "TimePiece"
+  interface.  Polymorphism is demonstrated through child classes of "Clock" inheriting
+  protected instance variables, and implementing a unique abstract method called display().
+  
+  
+  The overall algorithm is as follows:
+  1. Instantiate a Bag object to hold and manage Clock objects.
+  2. Instantiate one of each type of Clock, initializing start time to midnight.
+  3. Add each unique Clock to the Bag to manage.
+  4. To show how each Clock's drift affects its time, display each clock's
+     ClockType, name, current time, and total drift at the following stages of simulated elapsed time:
+     - At initial start time
+     - After 1 day elapses
+     - After 1 week elapses
+     - After 1 month elapses
+     - After 1 year elapses
+  
+     
+TESTING:  
+  
+  Testing was accomplished along the way as classes and methods were added.  The following manual tests
+  were completed confirming expected outcomes:
+  - Test each clock's display() method worked as expected.
+  - Test reset()
+  - Test tick()
+  - Test elapseTime()
+ 
+
+DISCUSSION:
+ 
+ Challenges for me were in understanding how the Time and Bag classes were to function.
+ Once that was clear, it was much easier to move forward from there to create the Clock
+ and its child classes, as well as the ClockSimulation class.
+ 
+ This project was a good exercise to fully implement the concepts of polymorphism,
+ inheritance and abstract classes.  It was also a good example of how to create a container
+ class.  I was able to work with UML Diagraming a lot for this project also, and that turned
+ out to be rather effective in designing my code.
+ 
